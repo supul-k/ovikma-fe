@@ -1,149 +1,233 @@
-import React , { useState } from 'react';
+import * as React from 'react';
 import './Navbar.css';
 
+import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
+import Badge from '@mui/material/Badge';
+import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
-import Container from '@mui/material/Container';
+import SearchIcon from '@mui/icons-material/Search';
+import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
+import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
+import MoreIcon from '@mui/icons-material/MoreVert';
 import Button from '@mui/material/Button';
-import MenuItem from '@mui/material/MenuItem';
-// import AdbIcon from '@mui/icons-material/Adb';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useNavigate } from 'react-router-dom';
 
-const pages = ['Home', 'Services', 'Product', 'Shop', 'Contact us'];
 
-const themeNavbar = createTheme({
-    components: {
-      MuiAppBar: {
-        styleOverrides: {
-          root: {
-            top: 0,
-            backgroundColor: 'white',
-            boxShadow: 'none',
-            position: 'fixed'
-          },
-        },
-      },
-    },
-});
 
-const Navbar = ({ visible  }) => {
+const navItems = ['Home', 'Shop', 'Product', 'Contact Us'];
 
-    const [anchorElNav, setAnchorElNav] = useState(null);
-  
-    const handleOpenNavMenu = (event) => {
-      setAnchorElNav(event.currentTarget);
-    };
-  
-    const handleCloseNavMenu = (page) => {
-        if (page === 'Services') {
-            const servicesHome = document.getElementById('services-home');
-            servicesHome.scrollIntoView({ behavior: 'smooth' });
-        }
-    };
+const Search = styled('div')(({ theme }) => ({
+  position: 'relative',
+  borderRadius: theme.shape.borderRadius,
+  backgroundColor: alpha(theme.palette.common.white, 0.15),
+  '&:hover': {
+    backgroundColor: alpha(theme.palette.common.white, 0.25),
+  },
+  marginRight: theme.spacing(2),
+  marginLeft: 0,
+  width: '100%',
+  [theme.breakpoints.up('sm')]: {
+    marginLeft: theme.spacing(3),
+    width: 'auto',
+  },
+}));
 
-    return (
-        <ThemeProvider theme={themeNavbar}>
-            <AppBar position="fixed" style={{ transform: `translateY(${visible ? '0' : '-100%'})`, transition: 'transform 0.3s' }}>
-                <Container maxWidth="xl">
-                    <Toolbar disableGutters>
-                        <Typography
-                                variant="h6"
-                                noWrap
-                                component="a"
-                                href="/"
-                                sx={{
-                                mr: 2,
-                                display: { xs: 'none', md: 'flex' },
-                                fontFamily: 'monospace',
-                                fontWeight: 700,
-                                letterSpacing: '.3rem',
-                                color: 'black',
-                                textDecoration: 'none',
-                            }}
-                        >
-                            ovikma
-                        </Typography>
+export default function PrimarySearchAppBar() {
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
-                        <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-                            <IconButton
-                                size="large"
-                                aria-label="account of current user"
-                                aria-controls="menu-appbar"
-                                aria-haspopup="true"
-                                onClick={handleOpenNavMenu}
-                                color="black"
-                            >
-                                <MenuIcon />
-                            </IconButton>
-                            <Menu
-                                id="menu-appbar"
-                                anchorEl={anchorElNav}
-                                anchorOrigin={{
-                                    vertical: 'bottom',
-                                    horizontal: 'left',
-                                }}
-                                keepMounted
-                                transformOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'left',
-                                }}
-                                open={Boolean(anchorElNav)}
-                                onClose={handleCloseNavMenu}
-                                sx={{
-                                    display: { xs: 'block', md: 'none', color: 'black' },
-                                }}
-                            >
-                                {pages.map((page) => (
-                                    <MenuItem key={page} onClick={() => handleCloseNavMenu(page)}>
-                                        <Typography textAlign="center">{page}</Typography>
-                                    </MenuItem>
-                                ))}
-                            </Menu>
-                        </Box>
-                        <Typography
-                            variant="h5"
-                            noWrap
-                            component="a"
-                            href=""
-                            sx={{
-                                mr: 2,
-                                display: { xs: 'flex', md: 'none' },
-                                flexGrow: 1,
-                                fontFamily: 'monospace',
-                                fontWeight: 700,
-                                letterSpacing: '.3rem',
-                                color: 'black',
-                                textDecoration: 'none',
-                            }}
-                        >
-                            ovikma
-                        </Typography>
-                        <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'space-evenly'}}>
-                            {pages.map((page) => (
-                            <Button
-                                key={page}
-                                onClick={() => handleCloseNavMenu(page)}
-                                className="hover-effect-navbar"
-                                sx={{ my: 2, color: 'black', display: 'block' }}
-                            >
-                                {page}
-                            </Button>
-                            ))}
-                        </Box>
+  const isMenuOpen = Boolean(anchorEl);
+  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
-                        <Box sx={{ flexGrow: 0 }}>
-                            
-                        </Box>
-                    </Toolbar>
-                </Container>
-            </AppBar>
-        </ThemeProvider>
-    );
-};
+  const handleProfileMenuOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
 
-export default Navbar;
+  const handleMobileMenuClose = () => {
+    setMobileMoreAnchorEl(null);
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+    handleMobileMenuClose();
+  };
+
+  const handleMobileMenuOpen = (event) => {
+    setMobileMoreAnchorEl(event.currentTarget);
+  };
+
+  const handlePagesMenuOpen = (event) => {
+
+  };
+
+  const menuId = 'primary-search-account-menu';
+  const renderMenu = (
+    <Menu
+      anchorEl={anchorEl}
+      anchorOrigin={{
+        vertical: 'top',
+        horizontal: 'right',
+      }}
+      id={menuId}
+      keepMounted
+      transformOrigin={{
+        vertical: 'top',
+        horizontal: 'right',
+      }}
+      open={isMenuOpen}
+      onClose={handleMenuClose}
+    >
+      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+    </Menu>
+  );
+
+  const mobileMenuId = 'primary-search-account-menu-mobile';
+  const renderMobileMenu = (
+    <Menu
+      anchorEl={mobileMoreAnchorEl}
+      anchorOrigin={{
+        vertical: 'top',
+        horizontal: 'right',
+      }}
+      id={mobileMenuId}
+      keepMounted
+      transformOrigin={{
+        vertical: 'top',
+        horizontal: 'right',
+      }}
+      open={isMobileMenuOpen}
+      onClose={handleMobileMenuClose}
+    >
+      <MenuItem>
+        <IconButton size="large" aria-label="show 4 new mails">
+            <SearchIcon />
+        </IconButton>
+        <p>Messages</p>
+      </MenuItem>
+      <MenuItem onClick={handleProfileMenuOpen}>
+        <IconButton
+          size="large"
+          aria-label="account of current user"
+          aria-controls="primary-search-account-menu"
+          aria-haspopup="true"
+        >
+          <PersonOutlineOutlinedIcon />
+        </IconButton>
+        <p>Profile</p>
+      </MenuItem>
+      <MenuItem>
+        <IconButton
+          size="large"
+          aria-label="show 17 new notifications"
+        >
+          <Badge badgeContent={17} color="error">
+            <LocalMallOutlinedIcon />
+          </Badge>
+        </IconButton>
+        <p>Add to cart</p>
+      </MenuItem>
+    </Menu>
+  );
+
+  const navigate = useNavigate();
+
+  return (
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar position="static" sx={{ backgroundColor: "#ffffff" }}>
+        <Toolbar>
+          <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="open drawer"
+            sx={{
+              mr: "2",
+              display: { xs: "block", sm: "none" },
+              color: "rgba(0, 0, 0, 0.54)",
+            }}
+            aria-haspopup="true"
+            onClick={handlePagesMenuOpen}
+          >
+            <MenuIcon />
+          </IconButton>
+          <Box sx={{ display: { xs: "none", sm: "block" } }}>
+            {navItems.map((item) => (
+              <Button
+                className="hover-effect-navbar"
+                key={item}
+                sx={{ color: "rgba(0, 0, 0, 0.54)" }}
+                onClick={() => {
+                  if (item === "Home") {
+                    navigate("/");
+                  } else {
+                    // Handle other items
+                  }
+                }}
+              >
+                {item}
+              </Button>
+            ))}
+          </Box>
+          <Box sx={{ flexGrow: 1, textAlign: "center" }}>
+            <Typography
+              variant="h6"
+              noWrap
+              component="a"
+              href="/"
+              sx={{
+                mr: 2,
+                fontFamily: "monospace",
+                fontWeight: 700,
+                color: "rgba(0, 0, 0, 0.54)",
+                letterSpacing: ".3rem",
+                textDecoration: "none",
+              }}
+            >
+              Ovikma
+            </Typography>
+          </Box>
+          <Box sx={{ display: { xs: "none", md: "flex" } }}>
+            <IconButton size="large" edge="end" aria-label="search ">
+              <SearchIcon />
+            </IconButton>
+            <IconButton
+              size="large"
+              edge="end"
+              aria-label="account of current user"
+              aria-controls={menuId}
+              aria-haspopup="true"
+              onClick={handleProfileMenuOpen}
+            >
+              <PersonOutlineOutlinedIcon />
+            </IconButton>
+            <IconButton size="large" aria-label="show 17 new notifications">
+              <Badge badgeContent={17} color="error">
+                <LocalMallOutlinedIcon />
+              </Badge>
+            </IconButton>
+          </Box>
+          <Box sx={{ display: { xs: "flex", md: "none" } }}>
+            <IconButton
+              size="large"
+              aria-label="show more"
+              aria-controls={mobileMenuId}
+              aria-haspopup="true"
+              onClick={handleMobileMenuOpen}
+            >
+              <MoreIcon />
+            </IconButton>
+          </Box>
+        </Toolbar>
+      </AppBar>
+      {renderMobileMenu}
+      {renderMenu}
+    </Box>
+  );
+}
