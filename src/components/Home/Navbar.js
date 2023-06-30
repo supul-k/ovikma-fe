@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState, useEffect } from 'react';
 import './Navbar.css';
 
 import { styled, alpha } from '@mui/material/styles';
@@ -39,8 +39,9 @@ const Search = styled('div')(({ theme }) => ({
 }));
 
 export default function PrimarySearchAppBar() {
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -142,6 +143,7 @@ export default function PrimarySearchAppBar() {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" sx={{ backgroundColor: "#ffffff" }}>
         <Toolbar>
+
           <IconButton
             size="large"
             edge="start"
@@ -157,6 +159,7 @@ export default function PrimarySearchAppBar() {
           >
             <MenuIcon />
           </IconButton>
+
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
             {navItems.map((item) => (
               <Button
@@ -166,8 +169,6 @@ export default function PrimarySearchAppBar() {
                 onClick={() => {
                   if (item === "Home") {
                     navigate("/");
-                  } else {
-                    // Handle other items
                   }
                 }}
               >
@@ -175,6 +176,7 @@ export default function PrimarySearchAppBar() {
               </Button>
             ))}
           </Box>
+
           <Box sx={{ flexGrow: 1, textAlign: "center" }}>
             <Typography
               variant="h6"
@@ -193,6 +195,7 @@ export default function PrimarySearchAppBar() {
               Ovikma
             </Typography>
           </Box>
+
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             <IconButton size="large" edge="end" aria-label="search ">
               <SearchIcon />
@@ -213,6 +216,7 @@ export default function PrimarySearchAppBar() {
               </Badge>
             </IconButton>
           </Box>
+
           <Box sx={{ display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
@@ -224,6 +228,7 @@ export default function PrimarySearchAppBar() {
               <MoreIcon />
             </IconButton>
           </Box>
+
         </Toolbar>
       </AppBar>
       {renderMobileMenu}
