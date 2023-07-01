@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 
 import Avatar from "@mui/material/Avatar";
@@ -20,6 +21,7 @@ export default function LoginPage({ openLoginModal, onCloseLoginModal }) {
     password: "",
     receiveEmails: false,
   });
+  const navigate = useNavigate();
 
   const handleChange = (event) => {
     const { name, value, type, checked } = event.target;
@@ -134,7 +136,7 @@ export default function LoginPage({ openLoginModal, onCloseLoginModal }) {
                   justifyContent: "center"
                 }}
               >
-                <Grid container spacing={2}>
+                <Grid container spacing={3}>
                   <Grid item xs={12}>
                     <TextField
                       required
@@ -181,8 +183,12 @@ export default function LoginPage({ openLoginModal, onCloseLoginModal }) {
                     border: "1px",
                     "&:hover": {
                       backgroundColor: "black",
-                      color: "whites",
+                      color: "white",
                     },
+                  }}
+                  onClick={() => {
+                    navigate("/register");
+                    onCloseLoginModal();
                   }}
                 >
                   CREATE YOUR ACCOUNT
