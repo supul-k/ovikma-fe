@@ -1,7 +1,8 @@
-import * as React from 'react';
-import './Navbar.css';
+import React, { useState } from 'react';
+import '../Navbar/Navbar.css'
+import LoginPage from '../LoginPage';
 
-import { styled, alpha } from '@mui/material/styles';
+// import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -22,25 +23,26 @@ import { useNavigate } from 'react-router-dom';
 
 const navItems = ['Home', 'Shop', 'Product', 'Contact Us'];
 
-const Search = styled('div')(({ theme }) => ({
-  position: 'relative',
-  borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
-  '&:hover': {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
-  },
-  marginRight: theme.spacing(2),
-  marginLeft: 0,
-  width: '100%',
-  [theme.breakpoints.up('sm')]: {
-    marginLeft: theme.spacing(3),
-    width: 'auto',
-  },
-}));
+// const Search = styled('div')(({ theme }) => ({
+//   position: 'relative',
+//   borderRadius: theme.shape.borderRadius,
+//   backgroundColor: alpha(theme.palette.common.white, 0.15),
+//   '&:hover': {
+//     backgroundColor: alpha(theme.palette.common.white, 0.25),
+//   },
+//   marginRight: theme.spacing(2),
+//   marginLeft: 0,
+//   width: '100%',
+//   [theme.breakpoints.up('sm')]: {
+//     marginLeft: theme.spacing(3),
+//     width: 'auto',
+//   },
+// }));
 
 export default function PrimarySearchAppBar() {
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -66,6 +68,18 @@ export default function PrimarySearchAppBar() {
 
   };
 
+  const [isLoginModalOpen, setLoginModalOpen] = useState(false);
+
+  const handleLoginModal = () => {
+    console.log('login clicked');
+    setLoginModalOpen(true);
+  };
+
+  const handleCloseLoginModal = () => {
+    setLoginModalOpen(false);
+  };
+
+
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
     <Menu
@@ -84,7 +98,7 @@ export default function PrimarySearchAppBar() {
       onClose={handleMenuClose}
     >
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem onClick={handleLoginModal}>Login</MenuItem>
     </Menu>
   );
 
@@ -139,9 +153,11 @@ export default function PrimarySearchAppBar() {
   const navigate = useNavigate();
 
   return (
+    <div>
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" sx={{ backgroundColor: "#ffffff" }}>
         <Toolbar>
+
           <IconButton
             size="large"
             edge="start"
@@ -157,6 +173,7 @@ export default function PrimarySearchAppBar() {
           >
             <MenuIcon />
           </IconButton>
+
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
             {navItems.map((item) => (
               <Button
@@ -166,8 +183,6 @@ export default function PrimarySearchAppBar() {
                 onClick={() => {
                   if (item === "Home") {
                     navigate("/");
-                  } else {
-                    // Handle other items
                   }
                 }}
               >
@@ -175,6 +190,7 @@ export default function PrimarySearchAppBar() {
               </Button>
             ))}
           </Box>
+
           <Box sx={{ flexGrow: 1, textAlign: "center" }}>
             <Typography
               variant="h6"
@@ -193,6 +209,7 @@ export default function PrimarySearchAppBar() {
               Ovikma
             </Typography>
           </Box>
+
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             <IconButton size="large" edge="end" aria-label="search ">
               <SearchIcon />
@@ -208,11 +225,12 @@ export default function PrimarySearchAppBar() {
               <PersonOutlineOutlinedIcon />
             </IconButton>
             <IconButton size="large" aria-label="show 17 new notifications">
-              <Badge badgeContent={17} color="error">
+              <Badge badgeContent={17}  sx={{ '& .MuiBadge-badge': { backgroundColor: '#cb8161' } }}>
                 <LocalMallOutlinedIcon />
               </Badge>
             </IconButton>
           </Box>
+
           <Box sx={{ display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
@@ -224,10 +242,17 @@ export default function PrimarySearchAppBar() {
               <MoreIcon />
             </IconButton>
           </Box>
+
         </Toolbar>
       </AppBar>
       {renderMobileMenu}
       {renderMenu}
+      
     </Box>
+    <LoginPage
+        openLoginModal={isLoginModalOpen}
+        onCloseLoginModal={handleCloseLoginModal}
+      />
+    </div>
   );
 }
