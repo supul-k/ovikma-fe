@@ -1,10 +1,10 @@
 .hover-effect-navbar {
   --s: 0.1em;
   /* the thickness of the line */
-  --c: #d9971c;
+  --c: #cb8161;
   /* the color */
 
-  color: #d9971c;
+  color: #cb8161;
   padding-bottom: var(--s);
   background:
     linear-gradient(90deg, var(--c) 50%, #ffffff 0) calc(100% - var(--_p, 0%))/200% 100%,
