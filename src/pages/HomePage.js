@@ -5,7 +5,7 @@ const HomePage = () => {
 
   return (
     <div>
-      hello
+      hello Home
     </div>
   );
 };
