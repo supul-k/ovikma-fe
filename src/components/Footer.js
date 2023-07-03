@@ -78,6 +78,9 @@ export default function Footer() {
             <Link href="https://www.twitter.com/" color="inherit">
               <Twitter />
             </Link>
+            <Link href="https://www.twitter.com/" color="inherit">
+              <Twitter />
+            </Link>
           </Grid>
         </Grid>
         <Box mt={5}>
