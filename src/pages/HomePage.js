@@ -1,3 +1,4 @@
+import { Card, Typography } from '@mui/material';
 import React from 'react';
 
 
@@ -5,7 +6,11 @@ const HomePage = () => {
 
   return (
     <div>
-      hello
+      <Card>
+        <Typography variant="h1" color="initial">
+          Hello Home
+        </Typography>
+      </Card>
     </div>
   );
 };
