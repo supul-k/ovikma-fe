@@ -1,16 +1,11 @@
-import { Card, Typography } from '@mui/material';
 import React from 'react';
-
+import CarouselComponent from '../components/Home/CarouselComponent';
 
 const HomePage = () => {
 
   return (
     <div>
-      <Card>
-        <Typography variant="h1" color="initial">
-          Hello Home
-        </Typography>
-      </Card>
+      <CarouselComponent/>
     </div>
   );
 };
