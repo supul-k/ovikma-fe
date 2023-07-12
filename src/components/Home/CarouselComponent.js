@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
-import "./Slider.css";
+import "./CareouselComponent.css";
 import { Typography, Button } from "@mui/material";
 import image1 from "../../assets/careouslImage1.jpg";
 import image2 from "../../assets/careouslImage2.jpg";
 import image3 from "../../assets/careouslImage3.jpg";
 
 const CarouselComponent = () => {
-  const headings = ["Heading 1", "Heading 2", "Heading 3"];
-  const Subheadings = ["SubHeading 1", "SubHeading 2", "SubHeading 3"];
+  const headings = ["Oh, Hello Newness!", "Summer Collection", "Spring Collection"];
+  const Subheadings = ["SALE UP TO 30% OFF", "SALE UP TO 30% OFF", "SALE UP TO 30% OFF"];
   const photos = [
     {
       id: "p1",
@@ -47,39 +47,39 @@ const CarouselComponent = () => {
   }, [currentIndex, photos.length]);
 
   return (
-    <>
-      <div className="slider-container" style={{ width: "100%" }}>
-        {photos.map((photo, index) => (
-          <div
-            key={photo.id}
-            className={
-              photos[currentIndex].id === photo.id ? "fade" : "slide fade"
-            }
-          >
-            <img src={photo.url} alt={photo.title} className="photo" />
-            <div className="caption">
-              <Typography variant="h4" align="center">
-                {Subheadings[index]}
-              </Typography>
-              <Typography variant="h1" align="center">
-                {headings[index]}
-              </Typography>
-              <Button variant="contained" size="large">
-                MUI Button
-              </Button>
+      <>
+        <div className="slider-container" style={{ width: "100%" }}>
+          {photos.map((photo, index) => (
+            <div
+              key={photo.id}
+              className={
+                photos[currentIndex].id === photo.id ? "fade" : "slide fade"
+              }
+            >
+              <img src={photo.url} alt={photo.title} className="photo" />
+              <div className="caption">
+                <Typography variant="h4" align="center" className="subheading">
+                  {Subheadings[index]}
+                </Typography>
+                <Typography variant="h1" align="center" className="heading">
+                  {headings[index]}
+                </Typography>
+                <Button variant="outlined" size="large" className="shop-now">
+                  SHOP NOW
+                </Button>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
 
-        <button onClick={prev} className="prev">
-          <span>&lt;</span>
-        </button>
+          <button onClick={prev} className="prev">
+            <span>&lt;</span>
+          </button>
 
-        <button onClick={next} className="next">
-          <span>&gt;</span>
-        </button>
-      </div>
-    </>
+          <button onClick={next} className="next">
+            <span>&gt;</span>
+          </button>
+        </div>
+      </>
   );
 };
 
