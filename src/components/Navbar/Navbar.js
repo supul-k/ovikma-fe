@@ -71,6 +71,8 @@ export default function PrimarySearchAppBar() {
   const [isLoginModalOpen, setLoginModalOpen] = useState(false);
 
   const handleLoginModal = () => {
+    setAnchorEl(null);
+    handleMobileMenuClose();
     console.log('login clicked');
     setLoginModalOpen(true);
   };

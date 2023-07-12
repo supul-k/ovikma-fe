@@ -1,0 +1,21 @@
+.main-box {
+    height: auto;
+    background-color: bisque;
+    display: grid;
+    justify-items: center;
+}
+
+.main-heading {
+    display: grid;
+    justify-items: center;
+    margin-top: 20px;
+}
+
+/* .card-new-arrivals {
+    transition: 0.2s;
+} */
+
+.card-new-arrivals :hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px 0 gray rotate(-12) darken(0.2) fade(0.5);
+}

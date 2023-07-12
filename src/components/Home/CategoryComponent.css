@@ -1,0 +1,62 @@
+.mainCard {
+    position: relative;
+}
+
+.mainCard:hover {
+    animation: shake 0.5s;
+}
+
+.photoCards {
+    width: 100%;
+    height: 70vh;
+    object-fit: cover;
+}
+
+.captionCards {
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    padding: 20px;
+    display: grid;
+    align-content: space-around;
+    justify-items: center;
+    align-items: center;
+}
+
+.show-cat {
+    color: rgb(34, 31, 31) !important;
+    width: 100%;
+    border-radius: 0;
+    background-color: white !important;
+    border-color: white !important;
+}
+
+.show-cat:hover {
+    border-color: #cb8161 !important;
+    background-color: #cb8161 !important;
+    transition: background-color 0.3s ease;
+}
+
+.no-shake {
+    animation: none !important;
+}
+
+@keyframes shake {
+    0% {
+        transform: translateX(-2%);
+    }
+
+    25% {
+        transform: translateX(-4%);
+    }
+
+    75% {
+        transform: translateX(4%);
+    }
+
+    100% {
+        transform: translateX(2%);
+    }
+}
