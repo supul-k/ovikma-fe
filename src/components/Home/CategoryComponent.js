@@ -40,12 +40,21 @@ const CategoryComponent = () => {
       <Grid container spacing={{ xs: 2, md: 3 }}>
         {photos.map((photo, index) => (
           <Grid item xs={12} sm={6} md={3} key={photo.id}>
-            <Card sx={{ height: "70vh" }} className="mainCard">
+            <Card
+              sx={{
+                height: "70vh",
+              }}
+              className="mainCard"
+            >
               <div className="card-content">
                 <img src={photo.url} alt={photo.title} className="photoCards" />
               </div>
               <div className="captionCards">
-                <Button variant="outlined" size="large" className="show-cat no-shake">
+                <Button
+                  variant="outlined"
+                  size="large"
+                  className="show-cat no-shake"
+                >
                   {CardButton[index]}
                 </Button>
               </div>
