@@ -2,6 +2,7 @@ import React from 'react';
 import CarouselComponent from '../components/Home/CarouselComponent';
 import CategoryComponent from '../components/Home/CategoryComponent';
 import NewArrivalsComponent from '../components/Home/NewArrivalsComponent';
+import ReviewsComponent from '../components/Home/ReviewsComponent';
 
 const HomePage = () => {
 
@@ -10,6 +11,7 @@ const HomePage = () => {
       <CarouselComponent/>
       <CategoryComponent/>
       <NewArrivalsComponent />
+      <ReviewsComponent />
     </div>
   );
 };
