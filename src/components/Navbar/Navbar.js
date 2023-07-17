@@ -185,6 +185,8 @@ export default function PrimarySearchAppBar() {
                 onClick={() => {
                   if (item === "Home") {
                     navigate("/");
+                  }else if(item === "Product") {
+                    navigate("/products");
                   }
                 }}
               >
